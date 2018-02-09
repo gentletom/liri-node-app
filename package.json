@@ -1,0 +1,19 @@
+{
+  "name": "liri-node-app",
+  "version": "1.0.0",
+  "description": "Liri node application. Coding Bootcamp at Georgia Tech Homework",
+  "main": "keys.js",
+  "dependencies": {
+    "fs": "X",   //X Denotes where package requests should go
+    "request": "X",   //X Denotes where package requests should go
+    "spotify": "X",   //X Denotes where package requests should go
+    "twitter": "X"   //X Denotes where package requests should go
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gentletom/liri-node-app.git"
+  },
