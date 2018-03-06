@@ -4,10 +4,11 @@
   "description": "Liri node application. Coding Bootcamp at Georgia Tech Homework",
   "main": "keys.js",
   "dependencies": {
-    "fs": "X",   //X Denotes where package requests should go
-    "request": "X",   //X Denotes where package requests should go
-    "spotify": "X",   //X Denotes where package requests should go
-    "twitter": "X"   //X Denotes where package requests should go
+    "dotenv": "^5.0.1",
+    "node-spotify-api": "^1.0.7",
+    "request": "^2.83.0",
+    "spotify": "^0.3.0",
+    "twitter": "^1.7.1"
   },
   "devDependencies": {},
   "scripts": {
@@ -16,4 +17,5 @@
   "repository": {
     "type": "git",
     "url": "git+https://github.com/gentletom/liri-node-app.git"
-  },
+  }
+}

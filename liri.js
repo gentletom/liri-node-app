@@ -1,8 +1,8 @@
 
-require("dotenc").config();
+require("dotenv").config();
 var keys = require('./keys.js');
 var twitter = require("twitter");
-var spotify = require("spotify");
+var Spotify = require("node-spotify-api");
 var request = require("request");
 var fs = require('fs');
 
@@ -41,10 +41,10 @@ function fetchTweets(){
 	console.log("Time for Tweets");
 	//new variable for instance of twitter, load keys from imported keys.js
 	var client = new twitter({
-		consumer_key: X,         // X denotes where key pull should go 
-		consumer_secret: X,      // X denotes where key pull should go 
-		access_token_key: X,     // X denotes where key pull should go 
-		access_token_secret: X,  // X denotes where key pull should go 
+		consumer_key: process.env.TWITTER_CONSUMER_KEY,        
+		consumer_secret: process.env.TWITTER_CONSUMER_SECRET,      
+		access_token_key: process.env.TWITTER_ACCESS_TOKEY_KEY,     
+		access_token_secret: process.env.TWITTER_ACCESS_TOKEN_SECRET,  
 	});
 
 	//parameters for twitter function and what twitter user to pull from (my own as a placement)
@@ -68,26 +68,21 @@ function fetchTweets(){
 function spotifyMe(){
 	console.log("Time for music");
 
-	//variable for search term, test if defined.
 
-	var searchTrack;
-	if(secondCommand === undefined){
-		searchTrack = "Can't Stop";
-	}else{
-		searchTrack = secondCommand;
-	}
-	// spotify search begins
-	spotify.search({type:'track', query:searchTrack}, function(err,data){
-	    if(err){
-	        console.log('Error occurred: ' + err);
-	        return;
-	    }else{
-	  		console.log("Artist: " + data.tracks.items[0].artists[0].name);
+	var spotify = new Spotify({
+		id: process.env.SPOTIFY_ID,
+		secret: process.env.SPOTIFY_SECRET
+	});
+	spotify.search({ type: 'track', query: secondCommand || "Can't Stop" }, function(err, data)
+		if (err) {
+			return console.log('Error occurred: ' + err);
+		}
+
+			console.log("Artist: " + data.tracks.items[0].artists[0].name);
 	        console.log("Song: " + data.tracks.items[0].name);
 	        console.log("Album: " + data.tracks.items[0].album.name);
 	        console.log("Preview Here: " + data.tracks.items[0].preview_url);
-	    }
-	});
+		)};
 };
 
 function aMovieForMe(){
@@ -101,7 +96,7 @@ function aMovieForMe(){
 		searchMovie = secondCommand;
 	};
 
-	var url = 'http://www.omdbapi.com/?t=' + searchMovie +'&y=&plot=long&tomatoes=true&r=json';
+	var url = 'http://www.omdbapi.com/?apikey=trilogy&t=' + searchMovie +'&y=&plot=long&tomatoes=true&r=json';
    	request(url, function(error, response, body){
 	    if(!error && response.statusCode == 200){
 	        console.log("Title: " + JSON.parse(body)["Title"]);
